@@ -29,8 +29,12 @@ import people03 from "./people03.png";
 import sureLink from "./sureLink.png";
 import loanLink from "./loanLink.png";
 import healtLink from "./healtLink.png";
+import clientLink from "./clientLink.png";
+import webDesign from "./webDesign.png";
 
 export {
+  clientLink,
+  webDesign,
   sureLink,
   loanLink,
   healtLink,

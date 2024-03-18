@@ -2,6 +2,7 @@ import {
   people01, people02, people03, facebook, instagram, linkedin, twitter, airbnb, binance, coinbase, dropbox, send, shield, star, sureLink,
   loanLink,
   healtLink,
+  clientLink,
 } from "../assets";
 
 export const navLinks = [
@@ -75,7 +76,7 @@ export const stats = [
   {
     id: "stats-1",
     title: "Number of Service",
-    value: "2",
+    value: "02",
   },
   {
     id: "stats-2",
@@ -198,8 +199,9 @@ export const clients = [
     logo: healtLink,
     desc: "HealthLink is a cutting-edge web and mobile-based application designed to streamline the connection between insurance companies, healthcare facilities, and beneficiaries"
   },
-  /*   {
-      id: "client-4",
-      logo: dropbox,
-    }, */
+  {
+    id: "client-/4",
+    logo: clientLink,
+    desc: "ClientLink is a feature-rich CRM (Customer Relationship Management) software solution designed to meet the diverse needs of businesses, from small-scale enterprises."
+  },
 ];

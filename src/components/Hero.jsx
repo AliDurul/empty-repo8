@@ -3,18 +3,56 @@ import { discount, robot, robot1 } from "../assets";
 import GetStarted from "./GetStarted";
 
 const Hero = () => {
+  const progressBarContainer = document.querySelector('.progress-bar__container');
+  const progressBar = document.querySelector('.progress-bar');
+  const progressBarText = document.querySelector('.progress-bar__text');
+
+  const progressBarStates = [0, 7, 27, 34, 68, 80, 95, 100];
+
+  let time = 0;
+
+  progressBarStates.forEach(state => {
+    let randomTime = Math.floor(Math.random() * 3000);
+    setTimeout(() => {
+      if (state == endState) {
+        gsap.to(progressBar, {
+          x: `${state}%`,
+          duration: 2,
+          backgroundColor: '#4895ef',
+          onComplete: () => {
+            progressBarText.style.display = "initial";
+            progressBarContainer.style.boxShadow = '0 0 5px #4895ef';
+          }
+        });
+      } else {
+        gsap.to(progressBar, {
+          x: `${state}%`,
+          duration: 2,
+        });
+      }
+    }, randomTime + time);
+    time += randomTime;
+  })
+
   return (
     <section id="home" className={`flex md:flex-row flex-col ${styles.paddingY}`}>
       <div className={`flex-1 ${styles.flexStart} flex-col xl:px-0 sm:px-16 px-6`}>
         <div className="flex flex-row items-center py-[6px] px-4 bg-discount-gradient rounded-[10px] mb-2">
           <img src={discount} alt="discount" className="w-[32px] h-[32px]" />
-          <p className={`${styles.paragraph} ml-2`}>
+       {/*    <p className={`${styles.paragraph} ml-2`}>
             <span className="text-white">--</span> ---{" "}
             <span className="text-white">--</span> ---
-          </p>
+          </p> */}
+          <div class="container">
+            <div class="progress-bar__container">
+              <div class="progress-bar">
+                <span class="progress-bar__text">Uploaded Successfully!</span>
+              </div>
+            </div>
+          </div>
         </div>
 
-        <div  className="flex flex-row justify-between items-center w-full">
+        <div className="flex flex-row justify-between items-center w-full">
           <div id="heroAnimation" className=" flex-1 font-poppins font-semibold ss:text-[72px] text-[52px] text-white ss:leading-[100.8px] leading-[75px]">
             <h1 className="">We are <span></span> <br className="sm:block hidden" /></h1>
             <h1 className=" pl-16">PayLink <span></span></h1>
