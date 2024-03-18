@@ -31,16 +31,16 @@ export const features = [
     content: "Our Software as a Service (SaaS) solutions cater to businesses of all sizes, providing customizable solutions according to their unique requirements",
   },
   {
-    id: "feature-2",
-    icon: shield,
-    title: "100% Secured",
-    content: "We take proactive steps make sure your information and business are secure.",
-  },
-  {
     id: "feature-3",
     icon: send,
     title: "BPO Services",
     content: "Our Business Process Outsourcing (BPO) services are designed to streamline your customer care support operations.",
+  },
+  {
+    id: "feature-2",
+    icon: shield,
+    title: "100% Secured",
+    content: "We take proactive steps make sure your information and business are secure.",
   },
 ];
 
@@ -74,18 +74,18 @@ export const feedback = [
 export const stats = [
   {
     id: "stats-1",
-    title: "User Active",
-    value: "---",
+    title: "Number of Service",
+    value: "2",
   },
   {
     id: "stats-2",
     title: "Trusted by Company",
-    value: "--",
+    value: "04",
   },
   {
     id: "stats-3",
-    title: "Transaction",
-    value: "$--",
+    title: "Number of Product",
+    value: "05",
   },
 ];
 
@@ -144,7 +144,7 @@ export const footerLinks = [
     title: "Help & Support",
     links: [
       {
-        name: "H7JM+F44, Heroes Pl, Lusaka, Zambia",
+        name: "2nd Floor,Finance House, Hero's Place, Lusaka, Zambia",
         link: "",
       },
       {

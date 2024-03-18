@@ -14,17 +14,17 @@ const Hero = () => {
           </p>
         </div>
 
-        <div className="flex flex-row justify-between items-center w-full">
-          <h1 className="flex-1 font-poppins font-semibold ss:text-[72px] text-[52px] text-white ss:leading-[100.8px] leading-[75px]">
-            We are  <br className="sm:block hidden" />{" "}
-            <span className="text-gradient pl-16">PayLink</span>{" "}
-          </h1>
+        <div  className="flex flex-row justify-between items-center w-full">
+          <div id="heroAnimation" className=" flex-1 font-poppins font-semibold ss:text-[72px] text-[52px] text-white ss:leading-[100.8px] leading-[75px]">
+            <h1 className="">We are <span></span> <br className="sm:block hidden" /></h1>
+            <h1 className=" pl-16">PayLink <span></span></h1>
+          </div>
           <div className="ss:flex hidden md:mr-4 mr-0">
             <GetStarted />
           </div>
         </div>
 
-     {/*    <h1 className="font-poppins font-semibold ss:text-[68px] text-[52px] text-white ss:leading-[100.8px] leading-[75px] w-full">
+        {/*    <h1 className="font-poppins font-semibold ss:text-[68px] text-[52px] text-white ss:leading-[100.8px] leading-[75px] w-full">
           Payment Method.
         </h1> */}
         <p className={`${styles.paragraph} max-w-[470px] mt-5`}>
