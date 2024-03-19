@@ -277,5 +277,32 @@ margin-top: 30px;
 }
 
 /* PROGRESS BAR */
+.progress-6 {
+  width: 200px;
+  height: 22px;
+  border-radius: 20px;
+  color: #514b82;
+  border: 2px solid;
+  position: relative;
+}
+.progress-6::before {
+  content: "";
+  position: absolute;
+  margin: 2px;
+  inset: 0 100% 0 0;
+  border-radius: inherit;
+  background: currentColor;
+  animation: p6 5s normal;
+}
+@keyframes p6 {
+  100% {
+    inset: 0;
+  }
+}
 
+#deploymentMessage{
+  display: none
+}
+
+/* ***** */
 

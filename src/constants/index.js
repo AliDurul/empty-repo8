@@ -164,12 +164,12 @@ export const socialMedia = [
   {
     id: "social-media-1",
     icon: instagram,
-    link: "https://www.instagram.com/",
+    link: "https://www.instagram.com/paylink_technologies_zm_ltd?igsh=NzVzOHoyYTdmeGd1",
   },
   {
     id: "social-media-2",
     icon: facebook,
-    link: "https://www.facebook.com/",
+    link: "https://www.facebook.com/share/v7SHfTnS81dDM6xV/?mibextid=qi2Omg",
   },
   {
     id: "social-media-3",
