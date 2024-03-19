@@ -5,7 +5,6 @@ import emailjs from '@emailjs/browser';
 
 const Modal = () => {
 
-    const [isModalOpen, setIsModalOpen] = useState(false);
     const form = useRef()
     const sendEmail = (e) => {
         e.preventDefault();
@@ -24,8 +23,8 @@ const Modal = () => {
             return;
         }
         emailjs
-            .sendForm('service_owcb6cr', 'template_clljk3d', form.current, {
-                publicKey: 'SE2BlSIl3g9RzQk8G',
+            .sendForm('service_ock2lzq', 'template_orvk07j', form.current, {
+                publicKey: 'HT-W6XkVuOHTyLNNk',
             })
             .then(
                 () => {
@@ -42,7 +41,6 @@ const Modal = () => {
                 },
             );
     };
-    console.log(isModalOpen);
 
     return (
         <div>
