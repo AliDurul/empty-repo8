@@ -1,9 +1,13 @@
-import mongoose, { Schema } from "mongoose";
+'use strict';
+
+const { mongoose } = require('../configs/dbConnection')
+const passwordEncrypt = require('../helpers/passwordEncrypt')
+const uniqueValidator = require("mongoose-unique-validator");
 
 let profile_imgs_name_list = ["Garfield", "Tinkerbell", "Annie", "Loki", "Cleo", "Angel", "Bob", "Mia", "Coco", "Gracie", "Bear", "Bella", "Abby", "Harley", "Cali", "Leo", "Luna", "Jack", "Felix", "Kiki"];
 let profile_imgs_collections_list = ["notionists-neutral", "adventurer-neutral", "fun-emoji"];
 
-const userSchema = mongoose.Schema({
+const UserSchema = mongoose.Schema({
 
     personal_info: {
         fullname: {
@@ -16,9 +20,18 @@ const userSchema = mongoose.Schema({
             type: String,
             required: true,
             lowercase: true,
+            validate: [
+                (email) => /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(email),
+                'Please fill a valid email address'
+            ],
             unique: true
         },
-        password: String,
+        password: {
+            type: String,
+            trim: true,
+            required: true,
+            set: (password) => passwordEncrypt(password),
+        },
         username: {
             type: String,
             minlength: [3, 'Username must be 3 letters long'],
@@ -33,7 +46,7 @@ const userSchema = mongoose.Schema({
             type: String,
             default: () => {
                 return `https://api.dicebear.com/6.x/${profile_imgs_collections_list[Math.floor(Math.random() * profile_imgs_collections_list.length)]}/svg?seed=${profile_imgs_name_list[Math.floor(Math.random() * profile_imgs_name_list.length)]}`
-            } 
+            }
         },
     },
     social_links: {
@@ -62,7 +75,7 @@ const userSchema = mongoose.Schema({
             default: "",
         }
     },
-    account_info:{
+    account_info: {
         total_posts: {
             type: Number,
             default: 0
@@ -77,17 +90,29 @@ const userSchema = mongoose.Schema({
         default: false
     },
     blogs: {
-        type: [ Schema.Types.ObjectId ],
+        type: [mongoose.Schema.Types.ObjectId],
         ref: 'blogs',
         default: [],
     }
 
-}, 
-{ 
-    timestamps: {
-        createdAt: 'joinedAt'
-    } 
+}, {
+    timestamps: { createdAt: 'joinedAt' },
+    collection: 'users'
 
 })
 
-export default mongoose.model("users", userSchema);
+UserSchema.set("toJSON", {
+    transform: (doc, ret) => {
+        delete ret.__v;
+        // ret.profile_img = ret.personal_info.profile_img;
+        // ret.username = ret.personal_info.username;
+        // ret.fullname = ret.personal_info.fullname;
+        // delete ret.personal_info; // Optional: remove the original personal_info object if not needed
+    }
+});
+
+UserSchema.plugin(uniqueValidator, {
+    message: "This {PATH} is exist",
+});
+
+module.exports = mongoose.model("User", UserSchema);
