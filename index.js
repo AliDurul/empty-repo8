@@ -10,12 +10,16 @@ require('dotenv').config()
 const HOST = process.env?.HOST || '127.0.0.1'
 const PORT = process.env?.PORT || 8000
 
+// Cors:
+const cors = require('cors')
+app.use(cors())
+
+// Async Error Handler:
 require('express-async-errors')
 
 /* ------------------------------------------------------- */
 // Database Connection:
 const { dbConnection } = require('./src/configs/dbConnection')
-const CustomError = require('./src/helpers/customError')
 dbConnection()
 
 /* ------------------------------------------------------- */
@@ -52,7 +56,10 @@ app.all('/', (req, res) => {
 app.use(require('./src/routes'))
 
 app.use('*', (req, res) => {
-    throw new CustomError('Route not found.', 404)
+    res.status(404).send({
+        error: true,
+        message: 'Route Not Found',
+    })
 })
 
 /* ------------------------------------------------------- */

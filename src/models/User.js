@@ -29,8 +29,8 @@ const UserSchema = mongoose.Schema({
         password: {
             type: String,
             trim: true,
-            required: true,
-            set: (password) => passwordEncrypt(password),
+            // required: true,
+            // set: (password) => passwordEncrypt(password),
         },
         username: {
             type: String,

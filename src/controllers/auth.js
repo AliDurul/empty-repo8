@@ -28,7 +28,7 @@ const SetToken = (user) => {
     const access = jwt.sign(payload, process.env.ACCESS_KEY, { expiresIn: '30m' })
     const refresh = jwt.sign({ _id: user._id }, process.env.REFRESH_KEY, { expiresIn: '3d' })
 
-    return { access, refresh }
+    return { error: false, access, refresh }
 }
 
 
@@ -54,20 +54,14 @@ module.exports = {
         if (!(email && password)) throw new CustomError('Please enter username/email and password.', 401)
 
         const user = await User.findOne({ 'personal_info.email': email })
-        
+
         if (!user) throw new CustomError('User not found.', 404)
-        
+
         if (user.personal_info.password !== passwordEncrypt(password)) throw new CustomError('Wrong username/email or password.', 401)
 
 
 
-        // res.send()
-        res.status(200).send({
-            error: false,
-            bearer: SetToken(user)
-        })
-
-
+        res.status(200).send(SetToken(user))
 
     },
 
@@ -93,18 +87,31 @@ module.exports = {
 
         const { fullname, email, password } = req.body
 
-        if (!(fullname && email && password)) throw new CustomError('Please fill all fields.', 400)
+        let user;
 
-        if (!/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,20}$/.test(password)) throw new CustomError('Password must be between 6 to 20 characters and include at least one numeric digit, one uppercase and one lowercase letter.', 400)
+        if (req.body.sub) {
+            const { sub, fullname, email, picture, } = req.body;
 
-        const username = await generateUsername(email)
+            user = await User.findOne({ _id: sub })
 
-        const user = await User.create({ personal_info: { fullname, email, password, username } })
+            if (user) return
 
-        res.status(201).send({
-            error: false,
-            bearer: SetToken(user)
-        })
+            user = await User.create({ personal_info: { fullname, email, profile_img: picture, username: await generateUsername(email) } })
+
+
+        } else {
+
+            if (!(fullname && email && password)) throw new CustomError('Please fill all fields.', 400)
+
+            if (!/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,20}$/.test(password)) throw new CustomError('Password must be between 6 to 20 characters and include at least one numeric digit, one uppercase and one lowercase letter.', 400)
+
+            const username = await generateUsername(email)
+
+            user = await User.create({ personal_info: { fullname, email, password: passwordEncrypt(password), username } })
+
+        }
+
+        res.status(201).send(SetToken(user))
     },
 
     refresh: async (req, res) => {
