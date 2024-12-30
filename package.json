@@ -18,7 +18,8 @@
     "jsonwebtoken": "^9.0.1",
     "mongoose": "^7.3.2",
     "mongoose-unique-validator": "^4.0.1",
-    "nanoid": "^4.0.2"
+    "nanoid": "^4.0.2",
+    "uuid": "^11.0.3"
   },
   "devDependencies": {
     "nodemon": "^3.0.1"

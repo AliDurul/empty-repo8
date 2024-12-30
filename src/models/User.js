@@ -3,11 +3,17 @@
 const { mongoose } = require('../configs/dbConnection')
 const passwordEncrypt = require('../helpers/passwordEncrypt')
 const uniqueValidator = require("mongoose-unique-validator");
+const { v4: uuidv4 } = require('uuid');
 
 let profile_imgs_name_list = ["Garfield", "Tinkerbell", "Annie", "Loki", "Cleo", "Angel", "Bob", "Mia", "Coco", "Gracie", "Bear", "Bella", "Abby", "Harley", "Cali", "Leo", "Luna", "Jack", "Felix", "Kiki"];
 let profile_imgs_collections_list = ["notionists-neutral", "adventurer-neutral", "fun-emoji"];
 
 const UserSchema = mongoose.Schema({
+
+    _id: {
+        type: String,
+        default: uuidv4,
+    },
 
     personal_info: {
         fullname: {

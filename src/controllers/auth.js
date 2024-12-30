@@ -96,8 +96,7 @@ module.exports = {
 
             if (user) return
 
-            user = await User.create({ personal_info: { fullname, email, profile_img: picture, username: await generateUsername(email) } })
-
+            user = await User.create({ _id: sub, personal_info: { fullname, email, profile_img: picture, username: await generateUsername(email) } })
 
         } else {
 
