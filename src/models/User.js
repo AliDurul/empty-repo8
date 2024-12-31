@@ -91,7 +91,7 @@ const UserSchema = mongoose.Schema({
             default: 0
         },
     },
-    google_auth: {
+    OAuth: {
         type: Boolean,
         default: false
     },

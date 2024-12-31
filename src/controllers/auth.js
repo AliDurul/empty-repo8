@@ -92,11 +92,11 @@ module.exports = {
         if (req.body.sub) {
             const { sub, fullname, email, picture, } = req.body;
 
-            user = await User.findOne({ _id: sub })
+            user = await User.findOne({ _id: sub });
 
-            if (user) return
+            if (user) return;
 
-            user = await User.create({ _id: sub, personal_info: { fullname, email, profile_img: picture, username: await generateUsername(email) } })
+            user = await User.create({ _id: sub, OAuth: true, personal_info: { fullname, email, profile_img: picture, username: await generateUsername(email) } })
 
         } else {
 
