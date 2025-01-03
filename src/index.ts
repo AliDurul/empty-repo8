@@ -41,7 +41,7 @@ app.use('/uploads', express.static('uploads'));
 app.use(authentication);
 
 // Logger:
-app.use(logger);
+// app.use(logger);
 
 // Query Handler:
 app.use(queryHandler);
