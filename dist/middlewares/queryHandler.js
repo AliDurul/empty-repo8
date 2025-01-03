@@ -29,11 +29,11 @@ const queryHandler = (req, res, next) => {
     skip = skip > 0 ? skip : (page * limit);
     /* FILTERING & SEARCHING & SORTING & PAGINATION */
     // Run for output:
-    res.getModelList = (Model_1, ...args_1) => __awaiter(void 0, [Model_1, ...args_1], void 0, function* (Model, customFilter = {}, populate = null) {
+    res.getModelList = (Model, customFilter = {}, populate = null) => __awaiter(void 0, void 0, void 0, function* () {
         return yield Model.find(Object.assign(Object.assign(Object.assign({}, filter), search), customFilter)).sort(sort).skip(skip).limit(limit).populate(populate);
     });
     // Details:
-    res.getModelListDetails = (Model_1, ...args_1) => __awaiter(void 0, [Model_1, ...args_1], void 0, function* (Model, customFilter = {}) {
+    res.getModelListDetails = (Model, customFilter = {}) => __awaiter(void 0, void 0, void 0, function* () {
         const data = yield Model.find(Object.assign(Object.assign(Object.assign({}, filter), search), customFilter));
         let details = {
             filter,

@@ -13,22 +13,22 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.generateUploadUrl = void 0;
-const nanoid_1 = require("nanoid");
-const awsConnection_1 = __importDefault(require("../configs/awsConnection"));
+const { nanoid } = require('nanoid');
+const awsConnection_js_1 = __importDefault(require("../configs/awsConnection.js"));
 const client_s3_1 = require("@aws-sdk/client-s3");
 const s3_request_presigner_1 = require("@aws-sdk/s3-request-presigner");
-const customError_1 = __importDefault(require("./customError"));
+const customError_js_1 = __importDefault(require("./customError.js"));
 const generateUploadUrl = () => __awaiter(void 0, void 0, void 0, function* () {
     const data = new Date();
-    const imageName = `${(0, nanoid_1.nanoid)(5)}-${data.getTime()}.jpg`;
+    const imageName = `${nanoid(5)}-${data.getTime()}.jpg`;
     const command = new client_s3_1.PutObjectCommand({
         Bucket: 'fullstack-blogly',
         Key: imageName,
         ContentType: 'image/jpeg',
     });
-    const signedUrl = yield (0, s3_request_presigner_1.getSignedUrl)(awsConnection_1.default, command, { expiresIn: 1000 });
+    const signedUrl = yield (0, s3_request_presigner_1.getSignedUrl)(awsConnection_js_1.default, command, { expiresIn: 1000 });
     if (!signedUrl)
-        throw new customError_1.default('Error while generating signed URL', 500);
+        throw new customError_js_1.default('Error while generating signed URL', 500);
     return signedUrl;
 });
 exports.generateUploadUrl = generateUploadUrl;
